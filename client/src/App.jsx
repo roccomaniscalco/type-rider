@@ -1,7 +1,7 @@
 import "./App.css";
 
-import Sentence from "./components/Sentence";
-import TextField from "./components/TextField";
+import Sentence from "./components/sentence/Sentence";
+import TextField from "./components/textField/TextField";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Sentence
         words={[
           { text: "hey", isTyped: false },
-          { text: "hi", isTyped: false },
+          { text: "hi", isTyped: true },
           { text: "hello", isTyped: false },
         ]}
       />

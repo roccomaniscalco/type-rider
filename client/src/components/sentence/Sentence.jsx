@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Sentence = ({ words }) => {
-  const currentWords = words;
+import Word from "../word/Word";
 
-  return <div>{words.map((word) => `${word.text} `)}</div>;
+const Sentence = ({ words }) => {
+  return <div>{words.map((word, i) => <Word {...word} key={i}/>)}</div>;
 };
 
 Sentence.propTypes = {
