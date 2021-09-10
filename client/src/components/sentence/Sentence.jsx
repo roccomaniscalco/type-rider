@@ -7,7 +7,7 @@ const Sentence = ({ words }) => {
   return (
     <div>
       {words.map((word) => (
-        <Word text={word.text} isTyped={word.isTyped} key={word.id} />
+        <Word text={word.content} isTyped={word.isTyped} key={word.id} />
       ))}
     </div>
   );
@@ -16,7 +16,7 @@ const Sentence = ({ words }) => {
 Sentence.propTypes = {
   words: PropTypes.arrayOf(
     PropTypes.exact({
-      text: PropTypes.string,
+      content: PropTypes.string,
       isTyped: PropTypes.bool,
       id: PropTypes.number,
     })

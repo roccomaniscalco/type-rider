@@ -1,23 +1,26 @@
 import React from "react";
+import PropTypes from "prop-types";
 import useWords from "../../customHooks/useWords";
 
 import Sentence from "../sentence/Sentence";
 import TextField from "../textField/TextField";
 
-const sentence = "Unlike other times of the day, evenings are always tranquil."
-
-const TypingInterface = () => {
-  const [words, currentWord, incrementWord] = useWords(sentence)
+const TypingInterface = ({ text }) => {
+  const [words, currentWord, incrementWord] = useWords(text);
 
   return (
     <div>
       <Sentence words={words} />
       <TextField
-        placeholder={currentWord.text}
+        placeholder={currentWord.content}
         onTyped={() => incrementWord()}
       />
     </div>
   );
+};
+
+TypingInterface.propTypes = {
+  text: PropTypes.string,
 };
 
 export default TypingInterface;
