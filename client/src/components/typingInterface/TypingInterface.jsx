@@ -4,14 +4,10 @@ import useWords from "../../customHooks/useWords";
 import Sentence from "../sentence/Sentence";
 import TextField from "../textField/TextField";
 
-const exampleWords = [
-  { text: "hey", isTyped: false, id: 0 },
-  { text: "hi", isTyped: false, id: 1 },
-  { text: "hello", isTyped: false, id: 2 },
-];
+const sentence = "Unlike other times of the day, evenings are always tranquil."
 
 const TypingInterface = () => {
-  const [words, currentWord, incrementWord] = useWords(exampleWords)
+  const [words, currentWord, incrementWord] = useWords(sentence)
 
   return (
     <div>
