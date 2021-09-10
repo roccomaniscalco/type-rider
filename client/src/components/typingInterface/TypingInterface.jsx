@@ -1,23 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import useWords from "../../customHooks/useWords";
 
 import Sentence from "../sentence/Sentence";
 import TextField from "../textField/TextField";
 
-const TypingInterface = () => {
-  const [words, setWords] = useState([
-    { text: "hey", isTyped: false, id: 0 },
-    { text: "hi", isTyped: false, id: 1 },
-    { text: "hello", isTyped: false, id: 2 },
-  ]);
+const exampleWords = [
+  { text: "hey", isTyped: false, id: 0 },
+  { text: "hi", isTyped: false, id: 1 },
+  { text: "hello", isTyped: false, id: 2 },
+];
 
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+const TypingInterface = () => {
+  const [words, currentWord, incrementWord] = useWords(exampleWords)
 
   return (
     <div>
       <Sentence words={words} />
       <TextField
-        placeholder={words[currentWordIndex].text}
-        onTyped={() => setCurrentWordIndex(currentWordIndex + 1)}
+        placeholder={currentWord.text}
+        onTyped={() => incrementWord()}
       />
     </div>
   );
