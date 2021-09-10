@@ -15,11 +15,14 @@ const useWords = (sentence) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   const incrementWord = () => {
-    const updatedWords = words;
+    const updatedWords = [...words];
     updatedWords[currentWordIndex].isTyped = true;
     setWords(updatedWords);
 
-    setCurrentWordIndex(currentWordIndex + 1);
+    if (currentWordIndex < words.length - 1)
+      setCurrentWordIndex(currentWordIndex + 1);
+
+    console.log(currentWordIndex);
   };
 
   return [words, words[currentWordIndex], incrementWord];
