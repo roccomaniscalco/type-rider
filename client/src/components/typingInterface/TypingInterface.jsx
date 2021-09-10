@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Sentence from "../sentence/Sentence";
 import TextField from "../textField/TextField";
@@ -10,21 +10,21 @@ const TypingInterface = () => {
     { text: "hello", isTyped: false },
   ]);
 
-  const [currentWord, setCurrentWord] = useState("hey");
-  const [currentValue, setCurrentValue] = useState("");
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+  const [currentWord, setCurrentWord] = useState(words[currentWordIndex].text);
+
+  useEffect(() => {
+    setCurrentWord(words[currentWordIndex].text);
+  }, [currentWordIndex]);
 
   const handleChange = (value) => {
-    value === currentWord ? setCurrentValue("") : setCurrentValue(value);
+    value === currentWord && setCurrentWordIndex(currentWordIndex + 1);
   };
 
   return (
     <div>
       <Sentence words={words} />
-      <TextField
-        placeholder={currentWord}
-        value={currentValue}
-        onChange={handleChange}
-      />
+      <TextField placeholder={currentWord} onChange={handleChange} />
     </div>
   );
 };

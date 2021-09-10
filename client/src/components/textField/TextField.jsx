@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const TextField = ({ placeholder, value, onChange }) => {
+const TextField = ({ placeholder, onChange }) => {
+  const [activeValue, setActiveValue] = useState("");
+
+  const handleChange = (currentValue) => {
+    currentValue === placeholder
+      ? setActiveValue("")
+      : setActiveValue(currentValue);
+    onChange(currentValue);
+  };
+
   return (
     <div>
-      <h2>{value}</h2>
+      <h2>{activeValue}</h2>
       <input
         type="text"
         placeholder={placeholder}
-        onChange={(e) => onChange(e.target.value)}
-        value={value}
+        onChange={(e) => handleChange(e.target.value)}
+        value={activeValue}
       />
     </div>
   );
@@ -17,7 +26,6 @@ const TextField = ({ placeholder, value, onChange }) => {
 
 TextField.propTypes = {
   placeholder: PropTypes.string,
-  activeValue: PropTypes.string,
   onChange: PropTypes.func,
 };
 
