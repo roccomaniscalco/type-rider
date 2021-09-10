@@ -5,26 +5,20 @@ import TextField from "../textField/TextField";
 
 const TypingInterface = () => {
   const [words, setWords] = useState([
-    { text: "hey", isTyped: false },
-    { text: "hi", isTyped: true },
-    { text: "hello", isTyped: false },
+    { text: "hey", isTyped: false, id: 0 },
+    { text: "hi", isTyped: false, id: 1 },
+    { text: "hello", isTyped: false, id: 2 },
   ]);
 
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [currentWord, setCurrentWord] = useState(words[currentWordIndex].text);
-
-  useEffect(() => {
-    setCurrentWord(words[currentWordIndex].text);
-  }, [currentWordIndex]);
-
-  const handleChange = (value) => {
-    value === currentWord && setCurrentWordIndex(currentWordIndex + 1);
-  };
 
   return (
     <div>
       <Sentence words={words} />
-      <TextField placeholder={currentWord} onChange={handleChange} />
+      <TextField
+        placeholder={words[currentWordIndex].text}
+        onTyped={() => setCurrentWordIndex(currentWordIndex + 1)}
+      />
     </div>
   );
 };

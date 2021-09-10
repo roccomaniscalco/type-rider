@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./word.css"
+import "./word.css";
 
 const Word = ({ text, isTyped }) => {
-  return <span className={isTyped ? "typed-word" : "untyped-word"}>{text} </span>;
+  return (
+    <span className={isTyped ? "typed-word" : "untyped-word"}>{text} </span>
+  );
 };
 
 Word.propTypes = {

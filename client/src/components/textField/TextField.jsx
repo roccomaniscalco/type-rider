@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const TextField = ({ placeholder, onChange }) => {
+const TextField = ({ placeholder, onTyped }) => {
   const [activeValue, setActiveValue] = useState("");
 
   const handleChange = (currentValue) => {
-    currentValue === placeholder
-      ? setActiveValue("")
-      : setActiveValue(currentValue);
-    onChange(currentValue);
+    if (currentValue === placeholder) {
+      setActiveValue("");
+      onTyped();
+    } else {
+      setActiveValue(currentValue);
+    }
   };
 
   return (
