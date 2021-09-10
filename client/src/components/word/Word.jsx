@@ -5,7 +5,7 @@ import "./word.css";
 
 const Word = ({ text, isTyped }) => {
   return (
-    <span className={isTyped ? "typed-word" : "untyped-word"}>{text} </span>
+    <span className={isTyped ? "typed-word" : "untyped-word"}>{text}</span>
   );
 };
 
