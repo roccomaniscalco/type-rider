@@ -1,14 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import Word from "../typography/Typography";
+import Typography from "../typography/Typography";
 
 const TextPrompt = ({ beforeWords, currentWord, afterWords }) => {
   return (
     <div>
-      <Word variant="typed">{beforeWords.join("")}</Word>
-      <Word variant="current">{currentWord}</Word>
-      <Word variant="untyped">{afterWords.join("")}</Word>
+      <Typography variant="typed">{beforeWords.join("")}</Typography>
+      <Typography variant="current">{currentWord}</Typography>
+      <Typography variant="untyped">{afterWords.join("")}</Typography>
     </div>
   );
 };

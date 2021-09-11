@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import useWords from "../../customHooks/useWords";
 
 import TextPrompt from "../textPrompt/TextPrompt";
-import TextField from "../textField/TextField";
+import TextInput from "../textInput/TextInput";
 
 const TypingInterface = ({ text }) => {
   const { beforeWords, currentWord, afterWords, incrementWord } =
@@ -21,7 +21,7 @@ const TypingInterface = ({ text }) => {
         currentWord={currentWord}
         afterWords={afterWords}
       />
-      <TextField
+      <TextInput
         placeholder={currentWord}
         onChange={() => {}}
         onComplete={() => incrementWord()}

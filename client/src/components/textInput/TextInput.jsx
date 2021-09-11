@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const TextField = ({ placeholder, onComplete, onChange }) => {
+const TextInput = ({ placeholder, onComplete, onChange }) => {
   const [activeValue, setActiveValue] = useState("");
 
   const handleChange = (currentValue) => {
@@ -27,10 +27,10 @@ const TextField = ({ placeholder, onComplete, onChange }) => {
   );
 };
 
-TextField.propTypes = {
+TextInput.propTypes = {
   placeholder: PropTypes.string,
   onComplete: PropTypes.func,
   onChange: PropTypes.func,
 };
 
-export default TextField;
+export default TextInput;
