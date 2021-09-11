@@ -7,7 +7,9 @@ const Sentence = ({ words }) => {
   return (
     <div>
       {words.map((word) => (
-        <Word text={word.content} isTyped={word.isTyped} key={word.id} />
+        <Word isTyped={word.isTyped} key={word.id}>
+          {word.content}
+        </Word>
       ))}
     </div>
   );

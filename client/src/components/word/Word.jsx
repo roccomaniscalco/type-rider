@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 
 import "./word.css";
 
-const Word = ({ text, isTyped }) => {
+const Word = ({ children, isTyped }) => {
   return (
-    <span className={isTyped ? "typed-word" : "untyped-word"}>{text}</span>
+    <span className={isTyped ? "typed-word" : "untyped-word"}>{children}</span>
   );
 };
 
 Word.propTypes = {
-  text: PropTypes.string,
+  children: PropTypes.string,
   isTyped: PropTypes.bool,
 };
 

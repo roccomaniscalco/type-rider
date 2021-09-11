@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+// return chars:arr from text:string
 const getChars = (text) => {
   const chars = [...text];
   return chars.map((char, index) => ({
