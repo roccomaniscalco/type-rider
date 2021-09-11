@@ -1,0 +1,11 @@
+.untyped {
+  color: gray;
+}
+
+.typed {
+  color: black;
+}
+
+.current {
+  color: royalblue;
+}
