@@ -2,21 +2,28 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import useWords from "../../customHooks/useWords";
-import useChars from "../../customHooks/useChars";
 
 import Sentence from "../sentence/Sentence";
 import TextField from "../textField/TextField";
 
 const TypingInterface = ({ text }) => {
-  const { words, currentWord, incrementWord } = useWords(text);
-  const { chars, currentChar, incrementChar } = useChars(text);
+  const { beforeWords, currentWord, afterWords, incrementWord } =
+    useWords(text);
+
+  console.log(beforeWords);
+  console.log(currentWord);
+  console.log(afterWords);
 
   return (
     <div>
-      <Sentence words={words} />
+      {/* <Sentence
+        beforeWords={beforeWords}
+        currentWord={currentWord}
+        afterWords={afterWords}
+      /> */}
       <TextField
-        placeholder={currentWord.content}
-        onChange={() => incrementChar()}
+        placeholder={currentWord}
+        onChange={() => {}}
         onComplete={() => incrementWord()}
       />
     </div>

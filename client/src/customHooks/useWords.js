@@ -1,33 +1,20 @@
 import { useState } from "react";
 
-// return words:arr from text:string
-const getWords = (text) => {
-  // include trailing space on each word:string in words:arr
-  const words = text.match(/\S+ |\S+/g);
-  return words.map((wordString, index) => ({
-    content: wordString,
-    isTyped: false,
-    id: index,
-  }));
-};
-
 const useWords = (text) => {
-  const [words, setWords] = useState(getWords(text));
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   const incrementWord = () => {
-    // create deep copy of words:arr
-    const updatedWords = [...words];
-    updatedWords[currentWordIndex].isTyped = true;
-    setWords(updatedWords);
-
-    if (currentWordIndex < words.length - 1)
+    if (currentWordIndex < words.length)
       setCurrentWordIndex(currentWordIndex + 1);
   };
 
+  // match words with trailing spaces
+  const words = text.match(/\S+ |\S+/g);
+
   return {
-    words: words,
+    beforeWords: words.slice(0, currentWordIndex),
     currentWord: words[currentWordIndex],
+    afterWords: words.slice(currentWordIndex + 1),
     incrementWord: incrementWord,
   };
 };
