@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import useWords from "../../customHooks/useWords";
@@ -9,14 +9,15 @@ import TextField from "../textField/TextField";
 
 const TypingInterface = ({ text }) => {
   const [words, currentWord, incrementWord] = useWords(text);
-//   const [chars, currentChar, incrementChar] = useChars(text)
+  const [chars, currentChar, incrementChar] = useChars(text)
 
   return (
     <div>
       <Sentence words={words} />
       <TextField
         placeholder={currentWord.content}
-        onTyped={() => incrementWord()}
+        onChange={() => incrementChar()}
+        onComplete={() => incrementWord()}
       />
     </div>
   );

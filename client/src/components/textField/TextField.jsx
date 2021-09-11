@@ -1,15 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const TextField = ({ placeholder, onTyped }) => {
+const TextField = ({ placeholder, onComplete, onChange }) => {
   const [activeValue, setActiveValue] = useState("");
 
   const handleChange = (currentValue) => {
+    setActiveValue(currentValue);
+    onChange();
+
     if (currentValue === placeholder) {
       setActiveValue("");
-      onTyped();
-    } else {
-      setActiveValue(currentValue);
+      onComplete();
     }
   };
 
@@ -28,6 +29,7 @@ const TextField = ({ placeholder, onTyped }) => {
 
 TextField.propTypes = {
   placeholder: PropTypes.string,
+  onComplete: PropTypes.func,
   onChange: PropTypes.func,
 };
 
