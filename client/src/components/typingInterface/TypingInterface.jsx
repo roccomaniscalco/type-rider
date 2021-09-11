@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import useWords from "../../customHooks/useWords";
 
-import Sentence from "../sentence/Sentence";
+import TextPrompt from "../textPrompt/TextPrompt";
 import TextField from "../textField/TextField";
 
 const TypingInterface = ({ text }) => {
@@ -16,11 +16,11 @@ const TypingInterface = ({ text }) => {
 
   return (
     <div>
-      {/* <Sentence
+      <TextPrompt
         beforeWords={beforeWords}
         currentWord={currentWord}
         afterWords={afterWords}
-      /> */}
+      />
       <TextField
         placeholder={currentWord}
         onChange={() => {}}
