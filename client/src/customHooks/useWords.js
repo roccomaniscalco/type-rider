@@ -1,14 +1,14 @@
 import { useState } from "react";
 
+// return words:arr from text:string
 const getWords = (text) => {
-  // include trailing space on each "wordString"
-  const wordStrings = text.match(/\S+ |\S+/g);
-  const words = wordStrings.map((wordString, index) => ({
+  // include trailing space on each word:string in words:arr
+  const words = text.match(/\S+ |\S+/g);
+  return words.map((wordString, index) => ({
     content: wordString,
     isTyped: false,
     id: index,
   }));
-  return words;
 };
 
 const useWords = (text) => {
@@ -16,7 +16,7 @@ const useWords = (text) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   const incrementWord = () => {
-    // create deep copy of "words"
+    // create deep copy of words:arr
     const updatedWords = [...words];
     updatedWords[currentWordIndex].isTyped = true;
     setWords(updatedWords);
