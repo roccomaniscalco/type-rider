@@ -25,7 +25,11 @@ const useWords = (text) => {
       setCurrentWordIndex(currentWordIndex + 1);
   };
 
-  return [words, words[currentWordIndex], incrementWord];
+  return {
+    words: words,
+    currentWord: words[currentWordIndex],
+    incrementWord: incrementWord,
+  };
 };
 
 export default useWords;

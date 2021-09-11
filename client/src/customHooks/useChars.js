@@ -24,7 +24,11 @@ const useChars = (text) => {
       setCurrentCharIndex(currentCharIndex + 1);
   };
 
-  return [chars, chars[currentCharIndex], incrementChar];
+  return {
+    chars: chars,
+    currentChar: chars[currentCharIndex],
+    incrementChar: incrementChar,
+  };
 };
 
 export default useChars;

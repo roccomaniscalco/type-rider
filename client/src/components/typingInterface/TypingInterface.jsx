@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import useWords from "../../customHooks/useWords";
@@ -8,8 +8,8 @@ import Sentence from "../sentence/Sentence";
 import TextField from "../textField/TextField";
 
 const TypingInterface = ({ text }) => {
-  const [words, currentWord, incrementWord] = useWords(text);
-  const [chars, currentChar, incrementChar] = useChars(text)
+  const { words, currentWord, incrementWord } = useWords(text);
+  const { chars, currentChar, incrementChar } = useChars(text);
 
   return (
     <div>
