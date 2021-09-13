@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
-const useWords = (text) => {
+const useWords = (defaultText) => {
+  const [words, setWords] = useState(defaultText.match(/\S+ |\S+/g));
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   const incrementWord = () => {
@@ -8,14 +9,18 @@ const useWords = (text) => {
       setCurrentWordIndex(currentWordIndex + 1);
   };
 
-  // match words with trailing spaces
-  const words = text.match(/\S+ |\S+/g);
+  const setText = useCallback((text) => {
+    // match words with trailing spaces
+    setWords(text.match(/\S+ |\S+/g));
+    setCurrentWordIndex(0);
+  }, []);
 
   return {
     beforeWords: words.slice(0, currentWordIndex),
     currentWord: words[currentWordIndex],
     afterWords: words.slice(currentWordIndex + 1),
     incrementWord: incrementWord,
+    setText: setText,
   };
 };
 

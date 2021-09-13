@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import useWords from "../../customHooks/useWords";
@@ -6,13 +6,13 @@ import useWords from "../../customHooks/useWords";
 import TextPrompt from "../textPrompt/TextPrompt";
 import TextInput from "../textInput/TextInput";
 
-const TypingInterface = ({ text }) => {
-  const { beforeWords, currentWord, afterWords, incrementWord } =
+const TypingInterface = ({ text, onComplete }) => {
+  const { beforeWords, currentWord, afterWords, incrementWord, setText } =
     useWords(text);
 
-  console.log(beforeWords);
-  console.log(currentWord);
-  console.log(afterWords);
+  useEffect(() => {
+    setText(text);
+  }, [setText, text]);
 
   return (
     <div>
@@ -20,6 +20,7 @@ const TypingInterface = ({ text }) => {
         beforeWords={beforeWords}
         currentWord={currentWord}
         afterWords={afterWords}
+        onComplete={onComplete}
       />
       <TextInput
         placeholder={currentWord}

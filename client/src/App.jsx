@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import TypingInterface from "./components/typingInterface/TypingInterface";
 
 async function getQuote() {
@@ -13,16 +13,19 @@ async function getQuote() {
 }
 
 function App() {
-  const [quote, setQuote] = useState(null)
+  const [quote, setQuote] = useState(null);
 
   useEffect(() => {
-    getQuote().then((data) => setQuote(data.content))
-  },
-  [])
+    getQuote().then((data) => setQuote(data.content));
+  }, []);
+
+  const handleComplete = useCallback(() => {
+    getQuote().then((data) => setQuote(data.content));
+  }, []);
 
   return (
     <div>
-      {quote && <TypingInterface text={quote}/>}
+      {quote && <TypingInterface text={quote} onComplete={handleComplete} />}
     </div>
   );
 }
