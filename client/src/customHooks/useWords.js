@@ -11,9 +11,10 @@ const useWords = (defaultText) => {
   };
 
   return {
-    beforeWords: words.slice(0, currentWordIndex),
+    unitWords: Math.round(defaultText.length / 5),
+    beforeWords: words.slice(0, currentWordIndex).join(""),
     currentWord: words[currentWordIndex] || "",
-    afterWords: words.slice(currentWordIndex + 1),
+    afterWords: words.slice(currentWordIndex + 1).join(""),
     incrementWord,
   };
 };

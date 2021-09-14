@@ -8,8 +8,8 @@ import TextPrompt from "../textPrompt/TextPrompt";
 import TextInput from "../textInput/TextInput";
 
 const TypingInterface = ({ text, onComplete }) => {
-  const { seconds, startTimer, stopTimer } = useTimer();
-  const { beforeWords, currentWord, afterWords, incrementWord } =
+  const { seconds, minutes, startTimer, stopTimer } = useTimer();
+  const { unitWords, beforeWords, currentWord, afterWords, incrementWord } =
     useWords(text);
 
   useEffect(() => {
@@ -25,6 +25,7 @@ const TypingInterface = ({ text, onComplete }) => {
         onComplete={() => {
           onComplete();
           stopTimer();
+          console.log(`${Math.round(unitWords / minutes)} WPM`);
         }}
       />
       <TextInput
