@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { string, oneOf } from "prop-types";
 
 import "./typography.css";
 
@@ -8,8 +8,8 @@ const Typography = ({ children, variant }) => {
 };
 
 Typography.propTypes = {
-  children: PropTypes.string,
-  variant: PropTypes.oneOf(["untyped", "typed", "current"]),
+  children: string.isRequired,
+  variant: oneOf(["untyped", "typed", "current"]).isRequired,
 };
 
 export default Typography;

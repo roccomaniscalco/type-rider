@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { string, func } from "prop-types";
 
 import useWords from "../../customHooks/useWords";
 import useTimer from "../../customHooks/useTimer";
@@ -8,10 +8,9 @@ import TextPrompt from "../textPrompt/TextPrompt";
 import TextInput from "../textInput/TextInput";
 
 const TypingInterface = ({ text, onComplete }) => {
+  const { seconds, startTimer, stopTimer } = useTimer();
   const { beforeWords, currentWord, afterWords, incrementWord } =
     useWords(text);
-
-  const { seconds, startTimer, stopTimer } = useTimer();
 
   useEffect(() => {
     startTimer();
@@ -26,7 +25,6 @@ const TypingInterface = ({ text, onComplete }) => {
         onComplete={() => {
           onComplete();
           stopTimer();
-          console.log(text);
         }}
       />
       <TextInput
@@ -40,8 +38,8 @@ const TypingInterface = ({ text, onComplete }) => {
 };
 
 TypingInterface.propTypes = {
-  text: PropTypes.string,
-  onComplete: PropTypes.func,
+  text: string.isRequired,
+  onComplete: func.isRequired,
 };
 
 export default TypingInterface;

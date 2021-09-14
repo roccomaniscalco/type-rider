@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import { string, func } from "prop-types";
 
 const TextInput = ({ placeholder, onComplete, onChange }) => {
   const [activeValue, setActiveValue] = useState("");
@@ -28,9 +28,9 @@ const TextInput = ({ placeholder, onComplete, onChange }) => {
 };
 
 TextInput.propTypes = {
-  placeholder: PropTypes.string,
-  onComplete: PropTypes.func,
-  onChange: PropTypes.func,
+  placeholder: string.isRequired,
+  onComplete: func.isRequired,
+  onChange: func.isRequired,
 };
 
 export default TextInput;

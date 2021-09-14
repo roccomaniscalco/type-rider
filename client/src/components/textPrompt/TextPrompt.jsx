@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import { arrayOf, string, func } from "prop-types";
 
 import Typography from "../typography/Typography";
 
 const TextPrompt = ({ beforeWords, currentWord, afterWords, onComplete }) => {
   useEffect(() => {
-    if (currentWord === undefined) {
+    if (currentWord === "") {
       onComplete();
     }
   }, [currentWord, onComplete]);
@@ -20,9 +20,10 @@ const TextPrompt = ({ beforeWords, currentWord, afterWords, onComplete }) => {
 };
 
 TextPrompt.propTypes = {
-  beforeWords: PropTypes.arrayOf(PropTypes.string),
-  currentWord: PropTypes.string,
-  afterWords: PropTypes.arrayOf(PropTypes.string),
+  beforeWords: arrayOf(string).isRequired,
+  currentWord: string.isRequired,
+  afterWords: arrayOf(string).isRequired,
+  onComplete: func.isRequired,
 };
 
 export default TextPrompt;
