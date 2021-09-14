@@ -8,14 +8,10 @@ import TextPrompt from "../textPrompt/TextPrompt";
 import TextInput from "../textInput/TextInput";
 
 const TypingInterface = ({ text, onComplete }) => {
-  const { beforeWords, currentWord, afterWords, incrementWord, setText } =
+  const { beforeWords, currentWord, afterWords, incrementWord } =
     useWords(text);
 
-  const { minutes, startTimer, stopTimer } = useTimer();
-
-  useEffect(() => {
-    setText(text);
-  }, [setText, text]);
+  const { seconds, startTimer, stopTimer } = useTimer();
 
   useEffect(() => {
     startTimer();
@@ -30,6 +26,7 @@ const TypingInterface = ({ text, onComplete }) => {
         onComplete={() => {
           onComplete();
           stopTimer();
+          console.log(text);
         }}
       />
       <TextInput
@@ -37,13 +34,14 @@ const TypingInterface = ({ text, onComplete }) => {
         onChange={() => {}}
         onComplete={() => incrementWord()}
       />
-      {minutes}
+      {seconds}
     </div>
   );
 };
 
 TypingInterface.propTypes = {
   text: PropTypes.string,
+  onComplete: PropTypes.func,
 };
 
 export default TypingInterface;

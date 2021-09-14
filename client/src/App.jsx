@@ -25,7 +25,7 @@ function App() {
 
   return (
     <div>
-      {quote && <TypingInterface text={quote} onComplete={handleComplete} />}
+      {quote && <TypingInterface text={quote} key={quote} onComplete={handleComplete} />}
     </div>
   );
 }
