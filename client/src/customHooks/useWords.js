@@ -5,8 +5,9 @@ const useWords = (defaultText) => {
   const words = defaultText.match(/\S+ |\S+/g);
 
   const incrementWord = () => {
-    if (currentWordIndex < words.length)
+    if (currentWordIndex < words.length) {
       setCurrentWordIndex(currentWordIndex + 1);
+    }
   };
 
   return {

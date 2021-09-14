@@ -1,29 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { string, func } from "prop-types";
 
 const TextInput = ({ placeholder, onComplete, onChange }) => {
   const [activeValue, setActiveValue] = useState("");
+  const textInput = useRef();
+
+  useEffect(() => {
+    textInput.current.focus();
+  }, []);
 
   const handleChange = (currentValue) => {
-    setActiveValue(currentValue);
     onChange();
 
     if (currentValue === placeholder) {
       setActiveValue("");
       onComplete();
+    } else {
+      setActiveValue(currentValue);
     }
   };
 
   return (
-    <div>
-      <h2>{activeValue}</h2>
-      <input
-        type="text"
-        placeholder={placeholder}
-        onChange={(e) => handleChange(e.target.value)}
-        value={activeValue}
-      />
-    </div>
+    <input
+      ref={textInput}
+      type="text"
+      placeholder={placeholder}
+      onChange={(e) => handleChange(e.target.value)}
+      value={activeValue}
+    />
   );
 };
 
