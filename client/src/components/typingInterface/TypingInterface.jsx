@@ -11,7 +11,7 @@ const TypingInterface = ({ text, onComplete }) => {
   const { beforeWords, currentWord, afterWords, incrementWord, setText } =
     useWords(text);
 
-  const { seconds, startTimer, stopTimer } = useTimer();
+  const { minutes, startTimer, stopTimer } = useTimer();
 
   useEffect(() => {
     setText(text);
@@ -19,7 +19,7 @@ const TypingInterface = ({ text, onComplete }) => {
 
   useEffect(() => {
     startTimer();
-  }, []);
+  }, [startTimer]);
 
   return (
     <div>
@@ -37,7 +37,7 @@ const TypingInterface = ({ text, onComplete }) => {
         onChange={() => {}}
         onComplete={() => incrementWord()}
       />
-      {seconds}
+      {minutes}
     </div>
   );
 };

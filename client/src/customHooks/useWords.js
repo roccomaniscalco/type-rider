@@ -19,8 +19,8 @@ const useWords = (defaultText) => {
     beforeWords: words.slice(0, currentWordIndex),
     currentWord: words[currentWordIndex],
     afterWords: words.slice(currentWordIndex + 1),
-    incrementWord: incrementWord,
-    setText: setText,
+    incrementWord,
+    setText,
   };
 };
 
