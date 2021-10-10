@@ -10,9 +10,9 @@ const useTimer = () => {
     }, 1000);
   }, []);
 
-  const stopTimer = () => {
+  const stopTimer = useCallback(() => {
     clearInterval(interval.current);
-  };
+  }, []);
 
   return {
     seconds,

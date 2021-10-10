@@ -16,17 +16,21 @@ const TypingInterface = ({ text, onComplete }) => {
     startTimer();
   }, [startTimer]);
 
+  useEffect(() => {
+    // handle round reset logic
+    if (currentWord === "") {
+      stopTimer();
+      onComplete();
+      console.log(`${Math.round(unitWords / minutes)} WPM`)
+    }
+  }, [currentWord, unitWords, minutes, stopTimer, onComplete]);
+
   return (
     <div>
       <TextPrompt
         beforeWords={beforeWords}
         currentWord={currentWord}
         afterWords={afterWords}
-        onComplete={() => {
-          onComplete();
-          stopTimer();
-          console.log(`${Math.round(unitWords / minutes)} WPM`);
-        }}
       />
       <TextInput placeholder={currentWord} onComplete={() => incrementWord()} />
       {seconds}

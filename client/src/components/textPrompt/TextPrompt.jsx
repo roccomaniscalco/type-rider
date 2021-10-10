@@ -1,16 +1,8 @@
-import { useEffect } from "react";
-import { string, func } from "prop-types";
+import { string } from "prop-types";
 
 import Typography from "../typography/Typography";
 
-const TextPrompt = ({ beforeWords, currentWord, afterWords, onComplete }) => {
-  // executes onComplete upon currentWord being 
-  useEffect(() => {
-    if (currentWord === "") {
-      onComplete();
-    }
-  }, [currentWord, onComplete]);
-
+const TextPrompt = ({ beforeWords, currentWord, afterWords }) => {
   return (
     <div>
       <Typography variant="typed">{beforeWords}</Typography>
@@ -24,7 +16,6 @@ TextPrompt.propTypes = {
   beforeWords: string.isRequired,
   currentWord: string.isRequired,
   afterWords: string.isRequired,
-  onComplete: func.isRequired,
 };
 
 export default TextPrompt;
