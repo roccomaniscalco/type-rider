@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { string, func } from "prop-types";
 
 import useWords from "../../customHooks/useWords";
@@ -30,7 +30,6 @@ const TypingInterface = ({ text, onComplete }) => {
       />
       <TextInput
         placeholder={currentWord}
-        onChange={() => {}}
         onComplete={() => incrementWord()}
       />
       {seconds}

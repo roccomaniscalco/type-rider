@@ -1,4 +1,3 @@
-import React from "react";
 import { string, oneOf } from "prop-types";
 
 import "./typography.css";

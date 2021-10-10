@@ -1,17 +1,16 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { string, func } from "prop-types";
 
-const TextInput = ({ placeholder, onComplete, onChange }) => {
+const TextInput = ({ placeholder, onComplete }) => {
   const [activeValue, setActiveValue] = useState("");
-  const textInput = useRef();
+  const textInputRef = useRef();
 
+  // force focus on TextInput upon mount
   useEffect(() => {
-    textInput.current.focus();
+    textInputRef.current.focus();
   }, []);
 
   const handleChange = (currentValue) => {
-    onChange();
-
     if (currentValue === placeholder) {
       setActiveValue("");
       onComplete();
@@ -22,7 +21,7 @@ const TextInput = ({ placeholder, onComplete, onChange }) => {
 
   return (
     <input
-      ref={textInput}
+      ref={textInputRef}
       type="text"
       placeholder={placeholder}
       onChange={(e) => handleChange(e.target.value)}
@@ -34,7 +33,6 @@ const TextInput = ({ placeholder, onComplete, onChange }) => {
 TextInput.propTypes = {
   placeholder: string.isRequired,
   onComplete: func.isRequired,
-  onChange: func.isRequired,
 };
 
 export default TextInput;

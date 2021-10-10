@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from "react";
 import TypingInterface from "./components/typingInterface/TypingInterface";
 
+// fetch a random quote from the Quotable API
 async function getQuote() {
-  // fetch a random quote from the Quotable API
   const response = await fetch("https://api.quotable.io/random");
   const data = await response.json();
   if (response.ok) {
@@ -25,7 +25,9 @@ function App() {
 
   return (
     <div>
-      {quote && <TypingInterface text={quote} key={quote} onComplete={handleComplete} />}
+      {quote && (
+        <TypingInterface text={quote} key={quote} onComplete={handleComplete} />
+      )}
     </div>
   );
 }

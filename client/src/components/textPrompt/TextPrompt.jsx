@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { string, func } from "prop-types";
 
 import Typography from "../typography/Typography";
 
 const TextPrompt = ({ beforeWords, currentWord, afterWords, onComplete }) => {
+  // executes onComplete upon currentWord being 
   useEffect(() => {
     if (currentWord === "") {
       onComplete();
