@@ -28,10 +28,7 @@ const TypingInterface = ({ text, onComplete }) => {
           console.log(`${Math.round(unitWords / minutes)} WPM`);
         }}
       />
-      <TextInput
-        placeholder={currentWord}
-        onComplete={() => incrementWord()}
-      />
+      <TextInput placeholder={currentWord} onComplete={() => incrementWord()} />
       {seconds}
     </div>
   );

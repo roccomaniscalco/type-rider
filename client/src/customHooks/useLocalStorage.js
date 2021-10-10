@@ -2,10 +2,7 @@ import { useState, useEffect } from "react";
 
 function getLocalStorageOrDefault(key, defaultValue) {
   const stored = localStorage.getItem(key);
-  if (!stored) {
-    return defaultValue;
-  }
-  return JSON.parse(stored);
+  return stored ? JSON.parse(stored) : defaultValue;
 }
 
 function useLocalStorage(key, defaultValue) {
@@ -17,7 +14,7 @@ function useLocalStorage(key, defaultValue) {
     localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
 
-  return [value, setValue];
+  return { value, setValue };
 }
 
 export default useLocalStorage;
