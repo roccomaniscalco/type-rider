@@ -1,32 +1,20 @@
-import { useEffect, useState, useCallback } from "react";
+import useSWRImmutable from "swr";
 import TypingInterface from "./components/typingInterface/TypingInterface";
 
-// fetch a random quote from the Quotable API
-async function getQuote() {
-  const response = await fetch("https://api.quotable.io/random");
-  const data = await response.json();
-  if (response.ok) {
-    return data;
-  } else {
-    console.log(data);
-  }
-}
+const fetcher = (url) => fetch(url).then((r) => r.json());
+const QUOTABLE_ROUTE = "https://api.quotable.io/random";
 
 function App() {
-  const [quote, setQuote] = useState(null);
-
-  useEffect(() => {
-    getQuote().then((data) => setQuote(data.content));
-  }, []);
-
-  const handleComplete = useCallback(() => {
-    getQuote().then((data) => setQuote(data.content));
-  }, []);
+  const { data: quote, mutate: mutateQuote } = useSWRImmutable(QUOTABLE_ROUTE, fetcher);
 
   return (
     <div>
       {quote && (
-        <TypingInterface text={quote} key={quote} onComplete={handleComplete} />
+        <TypingInterface
+          text={quote.content}
+          key={quote.content}
+          onComplete={() => mutateQuote()}
+        />
       )}
     </div>
   );

@@ -21,7 +21,7 @@ const TypingInterface = ({ text, onComplete }) => {
     if (currentWord === "") {
       stopTimer();
       onComplete();
-      console.log(`${Math.round(unitWords / minutes)} WPM`)
+      console.log(`${Math.round(unitWords / minutes)} WPM`);
     }
   }, [currentWord, unitWords, minutes, stopTimer, onComplete]);
 
