@@ -1,29 +1,34 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { string, func } from "prop-types";
 
 import useWords from "../../customHooks/useWords";
-import useTimer from "../../customHooks/useTimer";
+import useInterval from "../../customHooks/useInterval";
 
 import TextPrompt from "../textPrompt/TextPrompt";
 import TextInput from "../textInput/TextInput";
 
 const TypingInterface = ({ text, onComplete }) => {
-  const { seconds, minutes, startTimer, stopTimer } = useTimer();
+  const { seconds, minutes, startInterval, stopInterval } = useInterval();
   const { unitWords, beforeWords, currentWord, afterWords, incrementWord } =
     useWords(text);
 
-  useEffect(() => {
-    startTimer();
-  }, [startTimer]);
+  const startRound = useCallback(() => {
+    startInterval();
+  }, [startInterval]);
+
+  const endRound = useCallback(() => {
+    stopInterval();
+    onComplete();
+    console.log(`${Math.round(unitWords / minutes)} WPM`);
+  }, [stopInterval, unitWords, minutes, onComplete]);
 
   useEffect(() => {
-    // handle round reset logic
-    if (currentWord === "") {
-      stopTimer();
-      onComplete();
-      console.log(`${Math.round(unitWords / minutes)} WPM`);
-    }
-  }, [currentWord, unitWords, minutes, stopTimer, onComplete]);
+    startRound();
+  }, [startRound]);
+
+  useEffect(() => {
+    !currentWord && endRound();
+  }, [currentWord, endRound]);
 
   return (
     <div>
