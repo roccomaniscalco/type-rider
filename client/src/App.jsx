@@ -2,7 +2,7 @@ import TypingInterface from "./components/typingInterface/TypingInterface";
 import useQuote from "./customHooks/useQuote";
 
 function App() {
-  const { quote, mutateQuote } = useQuote();
+  const { quote, mutateQuote } = useQuote(true);
 
   return (
     <div>

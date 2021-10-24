@@ -1,10 +1,10 @@
-import useSWRImmutable from 'swr/immutable'
+import useSWRImmutable from "swr/immutable";
 
-const fetcher = (url) => fetch(url).then((r) => r.json());
+const GET = (url) => fetch(url).then((res) => res.json());
 const QUOTABLE_ROUTE = "https://api.quotable.io/random";
 
 const useQuote = () => {
-  const { data, mutate } = useSWRImmutable(QUOTABLE_ROUTE, fetcher);
+  const { data, mutate } = useSWRImmutable(QUOTABLE_ROUTE, GET);
   return { quote: data, mutateQuote: mutate };
 };
 
