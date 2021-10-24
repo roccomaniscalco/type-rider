@@ -1,11 +1,8 @@
-import useSWRImmutable from "swr";
 import TypingInterface from "./components/typingInterface/TypingInterface";
-
-const fetcher = (url) => fetch(url).then((r) => r.json());
-const QUOTABLE_ROUTE = "https://api.quotable.io/random";
+import useQuote from "./customHooks/useQuote";
 
 function App() {
-  const { data: quote, mutate: mutateQuote } = useSWRImmutable(QUOTABLE_ROUTE, fetcher);
+  const { quote, mutateQuote } = useQuote();
 
   return (
     <div>
