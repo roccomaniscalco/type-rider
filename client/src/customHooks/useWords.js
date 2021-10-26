@@ -1,21 +1,26 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
-const useWords = (defaultText) => {
-  // converts string to space delineated array of words
-  const words = useRef(defaultText.match(/\S+ |\S+/g));
+const useWords = (text, onComplete) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
+  // space delineated array of words from text
+  const words = text.match(/\S+ |\S+/g);
+  const typed = words?.slice(0, currentWordIndex)?.join("");
+  const current = words?.[currentWordIndex];
+  const remaining = words?.slice(currentWordIndex + 1)?.join("");
+
   const incrementWord = () => {
-    if (currentWordIndex < words.current.length) {
+    if (currentWordIndex >= words?.length - 1) {
+      setCurrentWordIndex(0);
+      onComplete();
+      console.log("complete");
+    } else {
       setCurrentWordIndex(currentWordIndex + 1);
     }
   };
 
   return {
-    unitWords: Math.round(defaultText.length / 5),
-    beforeWords: words.current.slice(0, currentWordIndex).join(""),
-    currentWord: words.current[currentWordIndex] || "",
-    afterWords: words.current.slice(currentWordIndex + 1).join(""),
+    words: { typed, current, remaining },
     incrementWord,
   };
 };

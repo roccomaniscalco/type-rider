@@ -2,20 +2,20 @@ import { string } from "prop-types";
 
 import Typography from "../typography/Typography";
 
-const TextPrompt = ({ beforeWords, currentWord, afterWords }) => {
+const TextPrompt = ({ typed, current, remaining }) => {
   return (
     <div>
-      <Typography variant="typed">{beforeWords}</Typography>
-      <Typography variant="current">{currentWord}</Typography>
-      <Typography variant="untyped">{afterWords}</Typography>
+      <Typography variant="typed">{typed}</Typography>
+      <Typography variant="current">{current}</Typography>
+      <Typography variant="untyped">{remaining}</Typography>
     </div>
   );
 };
 
 TextPrompt.propTypes = {
-  beforeWords: string.isRequired,
-  currentWord: string.isRequired,
-  afterWords: string.isRequired,
+  typed: string.isRequired,
+  current: string.isRequired,
+  remaining: string.isRequired,
 };
 
 export default TextPrompt;
