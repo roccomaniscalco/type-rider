@@ -4,12 +4,12 @@ const useWords = (text, onComplete) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
   // space delineated array of words from text
-  const words = text.match(/\S+ |\S+/g);
+  const words = text?.match(/\S+ |\S+/g);
   const typed = words?.slice(0, currentWordIndex)?.join("");
   const current = words?.[currentWordIndex];
   const remaining = words?.slice(currentWordIndex + 1)?.join("");
 
-  const incrementWord = () => {
+  const increment = () => {
     if (currentWordIndex >= words?.length - 1) {
       setCurrentWordIndex(0);
       onComplete();
@@ -20,8 +20,10 @@ const useWords = (text, onComplete) => {
   };
 
   return {
-    words: { typed, current, remaining },
-    incrementWord,
+    typed,
+    current,
+    remaining,
+    increment,
   };
 };
 

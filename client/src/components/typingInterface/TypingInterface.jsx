@@ -1,34 +1,40 @@
 import { useEffect } from "react";
-import { string, func } from "prop-types";
-
-import useWords from "../../customHooks/useWords";
-import useStopwatch from "../../customHooks/useStopwatch";
+import { string, func, exact, number } from "prop-types";
 
 import TextPrompt from "../textPrompt/TextPrompt";
 import TextInput from "../textInput/TextInput";
 
-const TypingInterface = ({ text, onComplete }) => {
-  const { seconds, startStopwatch, clearStopwatch } = useStopwatch();
-  const { words, incrementWord } = useWords(text, onComplete);
-
+const TypingInterface = ({ words, stopwatch }) => {
+  const { start, clear } = stopwatch;
   useEffect(() => {
-    startStopwatch();
-
-    return () => clearStopwatch();
-  }, [startStopwatch, clearStopwatch]);
+    // start stopwatch on mount
+    start();
+    // clear stopwatch on unmount
+    return () => clear();
+  }, [start, clear]);
 
   return (
     <div>
       <TextPrompt {...words} />
-      <TextInput placeholder={words.current} onComplete={incrementWord} />
-      {seconds}
+      <TextInput placeholder={words.current} onWordTyped={words.increment} />
+      {stopwatch.seconds}
     </div>
   );
 };
 
 TypingInterface.propTypes = {
-  text: string.isRequired,
-  onComplete: func.isRequired,
+  words: exact({
+    typed: string.isRequired,
+    current: string.isRequired,
+    remaining: string.isRequired,
+    increment: func.isRequired,
+  }),
+
+  stopwatch: exact({
+    seconds: number.isRequired,
+    start: func.isRequired,
+    clear: func.isRequired,
+  }),
 };
 
 export default TypingInterface;

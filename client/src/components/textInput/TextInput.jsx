@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { string, func } from "prop-types";
 
-const TextInput = ({ placeholder, onComplete }) => {
+const TextInput = ({ placeholder, onWordTyped }) => {
   const [activeValue, setActiveValue] = useState("");
   const textInputRef = useRef();
 
@@ -11,9 +11,10 @@ const TextInput = ({ placeholder, onComplete }) => {
   }, []);
 
   const handleChange = (currentValue) => {
+    // placeHolder has been typed typed
     if (currentValue === placeholder) {
       setActiveValue("");
-      onComplete();
+      onWordTyped();
     } else {
       setActiveValue(currentValue);
     }
@@ -32,7 +33,7 @@ const TextInput = ({ placeholder, onComplete }) => {
 
 TextInput.propTypes = {
   placeholder: string.isRequired,
-  onComplete: func.isRequired,
+  onWordTyped: func.isRequired,
 };
 
 export default TextInput;

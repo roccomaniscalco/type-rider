@@ -2,7 +2,7 @@ import { string } from "prop-types";
 
 import Typography from "../typography/Typography";
 
-const TextPrompt = ({ typed, current, remaining }) => {
+const TextPrompt = ({  typed, current, remaining }) => {
   return (
     <div>
       <Typography variant="typed">{typed}</Typography>

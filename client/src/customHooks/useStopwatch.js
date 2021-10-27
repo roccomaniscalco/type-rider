@@ -4,7 +4,7 @@ const useStopwatch = () => {
   const [seconds, setSeconds] = useState(0);
   const interval = useRef(null);
 
-  const startStopwatch = useCallback(() => {
+  const start = useCallback(() => {
     if (interval.current === null) {
       interval.current = setInterval(() => {
         setSeconds((seconds) => seconds + 1);
@@ -14,14 +14,14 @@ const useStopwatch = () => {
     }
   }, []);
 
-  const clearStopwatch = useCallback(() => {
+  const clear = useCallback(() => {
     clearInterval(interval.current);
   }, []);
 
   return {
     seconds,
-    startStopwatch,
-    clearStopwatch,
+    start,
+    clear,
   };
 };
 
