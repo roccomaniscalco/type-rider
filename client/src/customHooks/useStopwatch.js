@@ -2,7 +2,6 @@ import { useState, useCallback, useRef } from "react";
 
 const useStopwatch = () => {
   const [seconds, setSeconds] = useState(0);
-  const minutes = seconds / 60;
   const interval = useRef(null);
 
   const startStopwatch = useCallback(() => {
@@ -21,7 +20,6 @@ const useStopwatch = () => {
 
   return {
     seconds,
-    minutes,
     startStopwatch,
     clearStopwatch,
   };

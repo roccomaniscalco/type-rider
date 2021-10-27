@@ -8,7 +8,7 @@ import TextPrompt from "../textPrompt/TextPrompt";
 import TextInput from "../textInput/TextInput";
 
 const TypingInterface = ({ text, onComplete }) => {
-  const { seconds, minutes, startStopwatch, clearStopwatch } = useStopwatch();
+  const { seconds, startStopwatch, clearStopwatch } = useStopwatch();
   const { words, incrementWord } = useWords(text, onComplete);
 
   useEffect(() => {
