@@ -5,7 +5,7 @@ const useStopwatch = () => {
   const interval = useRef(null);
 
   const start = useCallback(() => {
-    if (interval.current === null) {
+    if (!interval.current) {
       interval.current = setInterval(() => {
         setSeconds((seconds) => seconds + 1);
       }, 1000);
@@ -16,6 +16,8 @@ const useStopwatch = () => {
 
   const clear = useCallback(() => {
     clearInterval(interval.current);
+    interval.current = null;
+    setSeconds(0);
   }, []);
 
   return {

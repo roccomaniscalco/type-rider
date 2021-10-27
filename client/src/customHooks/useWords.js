@@ -13,7 +13,6 @@ const useWords = (text, onComplete) => {
     if (currentWordIndex >= words?.length - 1) {
       setCurrentWordIndex(0);
       onComplete();
-      console.log("complete");
     } else {
       setCurrentWordIndex(currentWordIndex + 1);
     }

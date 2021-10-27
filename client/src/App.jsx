@@ -21,11 +21,7 @@ function App() {
   return (
     <div>
       {quote && isActiveRound ? (
-        <TypingInterface
-          words={words}
-          stopwatch={stopwatch}
-          onRoundOver={handleRoundOver}
-        />
+        <TypingInterface words={words} stopwatch={stopwatch} />
       ) : (
         <Button onClick={() => setIsActiveRound(true)}>Next Round</Button>
       )}
