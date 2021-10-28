@@ -24,11 +24,11 @@ const TextInput = ({ placeholder, onWordTyped }) => {
 
   return (
     <input
-      ref={textInputRef}
       type="text"
       placeholder={placeholder}
-      onChange={handleChange}
       value={value}
+      ref={textInputRef}
+      onChange={handleChange}
     />
   );
 };

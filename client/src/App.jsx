@@ -7,22 +7,22 @@ import Button from "./components/button/Button";
 import TextInput from "./components/textInput/TextInput";
 import TextPrompt from "./components/textPrompt/TextPrompt";
 import Stopwatch from "./components/stopwatch/Stopwatch";
+import calculateGrossWpm from "./utils/calculateGrossWpm";
 
 function App() {
-  const { quote, mutateQuote } = useQuote();
   const [isActiveRound, setIsActiveRound] = useState(true);
+  const [lastGrossWpm, setLastGrossWpm] = useState(null);
 
-  const resetRound = () => {
-    setIsActiveRound(false);
-    mutateQuote();
-  };
-
+  const { quote, mutateQuote } = useQuote();
+  const { seconds, start, clear } = useStopwatch();
   const { typed, current, remaining, increment } = useWords(
     quote?.content,
-    resetRound
+    () => {
+      setIsActiveRound(false);
+      setLastGrossWpm(calculateGrossWpm(quote.content, seconds));
+      mutateQuote();
+    }
   );
-
-  const { seconds, start, clear } = useStopwatch();
 
   return (
     <div>
@@ -33,7 +33,10 @@ function App() {
           <Stopwatch seconds={seconds} start={start} clear={clear} />
         </>
       ) : (
-        <Button onClick={() => setIsActiveRound(true)}>Next Round</Button>
+        <>
+          <Button onClick={() => setIsActiveRound(true)}>Next Round</Button>
+          {lastGrossWpm && <>Gross WPM: {lastGrossWpm}</>}
+        </>
       )}
     </div>
   );
