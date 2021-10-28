@@ -3,25 +3,35 @@ import useQuote from "./customHooks/useQuote";
 import useWords from "./customHooks/useWords";
 import useStopwatch from "./customHooks/useStopwatch";
 
-import TypingInterface from "./components/typingInterface/TypingInterface";
 import Button from "./components/button/Button";
+import TextInput from "./components/textInput/TextInput";
+import TextPrompt from "./components/textPrompt/TextPrompt";
+import Stopwatch from "./components/stopwatch/Stopwatch";
 
 function App() {
   const { quote, mutateQuote } = useQuote();
   const [isActiveRound, setIsActiveRound] = useState(true);
 
-  const handleRoundOver = () => {
+  const resetRound = () => {
     setIsActiveRound(false);
     mutateQuote();
   };
 
-  const words = useWords(quote?.content, handleRoundOver);
-  const stopwatch = useStopwatch();
+  const { typed, current, remaining, increment } = useWords(
+    quote?.content,
+    resetRound
+  );
+
+  const { seconds, start, clear } = useStopwatch();
 
   return (
     <div>
       {quote && isActiveRound ? (
-        <TypingInterface words={words} stopwatch={stopwatch} />
+        <>
+          <TextPrompt typed={typed} current={current} remaining={remaining} />
+          <TextInput placeholder={current} onWordTyped={increment} />
+          <Stopwatch seconds={seconds} start={start} clear={clear} />
+        </>
       ) : (
         <Button onClick={() => setIsActiveRound(true)}>Next Round</Button>
       )}

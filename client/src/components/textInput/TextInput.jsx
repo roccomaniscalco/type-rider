@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { string, func } from "prop-types";
 
 const TextInput = ({ placeholder, onWordTyped }) => {
-  const [activeValue, setActiveValue] = useState("");
+  const [value, setValue] = useState("");
   const textInputRef = useRef();
 
   // force focus on TextInput upon mount
@@ -10,13 +10,15 @@ const TextInput = ({ placeholder, onWordTyped }) => {
     textInputRef.current.focus();
   }, []);
 
-  const handleChange = (currentValue) => {
-    // placeHolder has been typed typed
-    if (currentValue === placeholder) {
-      setActiveValue("");
+  const handleChange = (e) => {
+    const value = e.target.value;
+
+    // placeHolder has been typed
+    if (value === placeholder) {
+      setValue("");
       onWordTyped();
     } else {
-      setActiveValue(currentValue);
+      setValue(value);
     }
   };
 
@@ -25,8 +27,8 @@ const TextInput = ({ placeholder, onWordTyped }) => {
       ref={textInputRef}
       type="text"
       placeholder={placeholder}
-      onChange={(e) => handleChange(e.target.value)}
-      value={activeValue}
+      onChange={handleChange}
+      value={value}
     />
   );
 };
