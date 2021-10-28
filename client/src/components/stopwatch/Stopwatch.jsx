@@ -1,6 +1,9 @@
 import { useEffect } from "react";
+import useStopwatch from "../../customHooks/useStopwatch";
 
-const Stopwatch = ({ seconds, start, clear }) => {
+const Stopwatch = () => {
+  const { seconds, start, clear } = useStopwatch();
+
   useEffect(() => {
     // start stopwatch on mount
     start();

@@ -8,7 +8,7 @@ const Typography = ({ children, variant }) => {
 
 Typography.propTypes = {
   children: string.isRequired,
-  variant: oneOf(["untyped", "typed", "current"]).isRequired,
+  variant: oneOf(["untyped", "typed", "success", "error"]).isRequired,
 };
 
 export default Typography;

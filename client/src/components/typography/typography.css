@@ -6,6 +6,10 @@
   color: black;
 }
 
-.current {
+.success {
   color: royalblue;
+}
+
+.error {
+  color: red;
 }
