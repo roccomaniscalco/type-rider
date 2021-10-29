@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
-import { StatsProvider } from "./contexts/StatsContext";
+import calculateGrossWpm from "./utils/calculateGrossWpm";
+
 import useQuote from "./customHooks/useQuote";
 import useStopwatch from "./customHooks/useStopwatch";
 
@@ -9,17 +10,20 @@ import Button from "./components/button/Button";
 
 function App() {
   const [isActiveRound, setIsActiveRound] = useState(true);
+  const [grossWpm, setGrossWpm] = useState(null);
 
   const { seconds, start, clear } = useStopwatch();
   const { quote, mutateQuote } = useQuote();
 
+  // execute when round is over
   const handleComplete = useCallback(() => {
-    mutateQuote();
+    setGrossWpm(calculateGrossWpm(quote.content, seconds));
     setIsActiveRound(false);
-  }, [mutateQuote]);
+    mutateQuote();
+  }, [mutateQuote, quote, seconds]);
 
   return (
-    <StatsProvider>
+    <>
       {quote && isActiveRound ? (
         <>
           <TypingInterface text={quote.content} onComplete={handleComplete} />
@@ -28,9 +32,10 @@ function App() {
       ) : (
         <>
           <Button onClick={() => setIsActiveRound(true)}>Next Round</Button>
+          {grossWpm && <>{grossWpm}</>}
         </>
       )}
-    </StatsProvider>
+    </>
   );
 }
 
