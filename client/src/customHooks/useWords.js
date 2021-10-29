@@ -10,9 +10,9 @@ const useWords = (text, onComplete) => {
   const remaining = words?.slice(currentWordIndex + 1)?.join("");
 
   const increment = () => {
-    if (currentWordIndex >= words?.length - 1) {
+    if (remaining.length === 0) {
       setCurrentWordIndex(0);
-      onComplete();
+      onComplete()
     } else {
       setCurrentWordIndex(currentWordIndex + 1);
     }

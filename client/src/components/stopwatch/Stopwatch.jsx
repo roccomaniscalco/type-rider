@@ -1,9 +1,7 @@
+import { func, number } from "prop-types";
 import { useEffect } from "react";
-import useStopwatch from "../../customHooks/useStopwatch";
 
-const Stopwatch = () => {
-  const { seconds, start, clear } = useStopwatch();
-
+const Stopwatch = ({ seconds, start, clear }) => {
   useEffect(() => {
     // start stopwatch on mount
     start();
@@ -12,6 +10,12 @@ const Stopwatch = () => {
   }, [start, clear]);
 
   return <>{seconds}</>;
+};
+
+Stopwatch.propTypes = {
+  seconds: number.isRequired,
+  start: func.isRequired,
+  clear: func.isRequired,
 };
 
 export default Stopwatch;
