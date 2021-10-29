@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import calculateGrossWpm from "./utils/calculateGrossWpm";
+import { calculateGrossWpm } from "./utils/calculations";
 
 import useQuote from "./customHooks/useQuote";
 import useStopwatch from "./customHooks/useStopwatch";
@@ -11,16 +11,20 @@ import Button from "./components/button/Button";
 function App() {
   const [isActiveRound, setIsActiveRound] = useState(true);
   const [grossWpm, setGrossWpm] = useState(null);
+  const [accuracy, setAccuracy] = useState(null);
 
   const { seconds, start, clear } = useStopwatch();
   const { quote, mutateQuote } = useQuote();
 
   // execute when round is over
-  const handleComplete = useCallback(() => {
-    setGrossWpm(calculateGrossWpm(quote.content, seconds));
-    setIsActiveRound(false);
-    mutateQuote();
-  }, [mutateQuote, quote, seconds]);
+  const handleComplete = useCallback(
+    (correctCharCount) => {
+      setIsActiveRound(false);
+      mutateQuote();
+      setAccuracy(`${correctCharCount} / ${quote.content.length}`);
+    },
+    [mutateQuote, quote]
+  );
 
   return (
     <>
@@ -32,7 +36,8 @@ function App() {
       ) : (
         <>
           <Button onClick={() => setIsActiveRound(true)}>Next Round</Button>
-          {grossWpm && <>{grossWpm}</>}
+          {grossWpm && <>Gross WPM: {grossWpm}</>}
+          {accuracy && <>Accuracy: {accuracy}</>}
         </>
       )}
     </>

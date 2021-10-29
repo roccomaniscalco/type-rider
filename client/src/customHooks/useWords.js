@@ -5,6 +5,7 @@ const useWords = (text, onComplete) => {
 
   // space delineated array of words from text
   const words = text?.match(/\S+ |\S+/g);
+
   const typed = words?.slice(0, currentWordIndex)?.join("");
   const current = words?.[currentWordIndex];
   const remaining = words?.slice(currentWordIndex + 1)?.join("");
@@ -12,7 +13,7 @@ const useWords = (text, onComplete) => {
   const increment = () => {
     if (remaining.length === 0) {
       setCurrentWordIndex(0);
-      onComplete()
+      onComplete();
     } else {
       setCurrentWordIndex(currentWordIndex + 1);
     }
