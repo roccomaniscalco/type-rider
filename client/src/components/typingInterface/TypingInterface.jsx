@@ -34,9 +34,9 @@ const TypingInterface = ({ text, onComplete }) => {
   // update correct char count and set correct char indices to current's chars
   // executed when current is updated
   useEffect(() => {
-    setCorrectCharCount(correctCharCount + correctCharIndices.length);
+    setCorrectCharCount((c) => c + correctCharIndices.length);
     setCorrectCharIndices([...Array(current?.length).keys()]);
-  }, [current]);
+  }, [current, setCorrectCharCount, setCorrectCharIndices]);
 
   const handleChange = (e) => {
     const value = e.target.value;
