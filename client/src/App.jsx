@@ -27,32 +27,29 @@ function App() {
     [mutateQuote, quote]
   );
 
+  // active round view
+  if (quote && isActiveRound)
+    return (
+      <>
+        <TypingInterface text={quote.content} onComplete={handleComplete} />
+        <Stopwatch seconds={seconds} start={start} stop={stop} />
+      </>
+    );
+
+  // results view
   return (
     <>
-      {quote && isActiveRound ? (
+      <Button onClick={() => setIsActiveRound(true)}>Next Round</Button>
+      {lastQuote && seconds && (
+        <>Gross WPM: {calculateGrossWpm(lastQuote.content.length, seconds)}</>
+      )}
+      {lastCorrectCharCount && (
         <>
-          <TypingInterface text={quote.content} onComplete={handleComplete} />
-          <Stopwatch seconds={seconds} start={start} stop={stop} />
-        </>
-      ) : (
-        <>
-          <Button onClick={() => setIsActiveRound(true)}>Next Round</Button>
-          {lastQuote && seconds && (
-            <>
-              Gross WPM: {calculateGrossWpm(lastQuote.content.length, seconds)}
-            </>
-          )}
-          {lastCorrectCharCount && (
-            <>
-              Accuracy:{" "}
-              {
-                calculateAccuracy(
-                  lastQuote.content.length,
-                  lastCorrectCharCount
-                ).percent
-              }
-            </>
-          )}
+          Accuracy:{" "}
+          {
+            calculateAccuracy(lastQuote.content.length, lastCorrectCharCount)
+              .percent
+          }
         </>
       )}
     </>
